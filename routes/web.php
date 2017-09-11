@@ -65,7 +65,8 @@ Event::listen('user.login', function($user) {
 // });
 
 Route::get('/', function() {
-    return 'See you soon~';
+    // return 'See you soon~';
+    return App\Post::findOrFail(100); //when post id 100 doesn't exist
 });
 
 Route::get('home', [
