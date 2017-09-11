@@ -74,7 +74,26 @@ Route::post('auth/register', 'Auth\RegisterController@register');
 
 // Route::resource('posts', 'PostsController');
 
+// Route::get('posts', function() {
+//     $posts = App\Post::get();
 
+//     return view('posts.index', compact('posts'));
+// });
+
+//Eager loading
+// Route::get('posts', function() {
+//     $posts = App\Post::with('user')->get();
+
+//     return view('posts.index', compact('posts'));
+// });
+
+//lazy Eager loading
+Route::get('posts', function() {
+    $posts = App\Post::get();
+    $posts->load('user');
+
+    return view('posts.index', compact('posts'));
+});
 
 // Route::get('posts', [
 //     'as'   => 'posts.index',
@@ -116,3 +135,8 @@ Route::post('auth/register', 'Auth\RegisterController@register');
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+DB::listen(function($event) {
+    var_dump($event->sql);
+    // dd($event->sql);
+});
