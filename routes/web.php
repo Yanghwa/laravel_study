@@ -99,6 +99,25 @@ Route::post('auth/register', 'Auth\RegisterController@register');
 //     return view('posts.index', compact('posts'));
 // });
 
+
+Route::post('posts', function(\Illuminate\Http\Request $request) {
+    $rules = [
+        'title'=>['required'],  //=='title' => 'required'
+        'body'=>['required', 'min:10'] // == 'body =>'required|min:10'
+    ];
+    $validator = Validator::make($request->all(), $rules);
+
+    if($validator->fails()) {
+        return redirect('posts/create')->withErrors($validator)->withInput();
+    }
+
+    return 'Valid & proceed to next job->';
+});
+
+Route::get('posts/create', function() {
+    return view('posts.create');
+});
+
 Route::get('posts', function() {
     $posts = App\Post::with('user')->paginate(10);
 
