@@ -27,6 +27,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $dates = ['last_login'];
+
     public function posts() {
         return $this->hasMany('App\Post');
     }
