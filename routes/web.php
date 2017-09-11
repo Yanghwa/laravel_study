@@ -79,11 +79,15 @@ EOT;
     return app(ParsedownExtra::class)->text($text);
 });
 
-Route::get('docs/{file?}', function($file = null) {
-    $text = (new App\Document)->get($file);
+// Route::get('docs/{file?}', function($file = null) {
+//     $text = (new App\Document)->get($file);
 
-    return app(ParsedownExtra::class)->text($text);
-});
+//     return app(ParsedownExtra::class)->text($text);
+// });
+Route::get('docs/{file?}', [
+    'as' => 'documents.show',
+    'uses' => 'DocumentsController@show'
+]);
 
 Route::get('home', [
     'middleware' => 'auth',

@@ -46,7 +46,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if($exception instanceof ModelNotFoundException or $exception instanceof NotFoundHttpException) {
+        if($exception instanceof ModelNotFoundException ) {
             return response(view('errors.notice', [
                 'title' => 'Page Not Found',
                 'description' => 'Sorry, the page or resource you are trying to view does not exist.'
