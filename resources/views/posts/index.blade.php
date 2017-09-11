@@ -16,4 +16,9 @@
         <p>There is no articles!</p>
     @endforelse
 <ul>
+@if($posts)
+    <div class="text-center">
+        {!! $posts->render() !!}
+    </div>
+@endif
 @stop
