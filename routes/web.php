@@ -106,6 +106,20 @@ Route::get('posts', function() {
 //     'uses' => 'PostsController@index'
 // ]);
 
+Route::get('mail', function() {
+    $to = 'kellerj87@hotmail.com';
+    $subject = 'Studying sending email in Laravel';
+    $data = [
+        'title' => 'Hi there',
+        'body' => 'This is the body of an email message',
+        'user' => App\User::find(1)
+    ];
+    return Mail::send('emails.welcome', $data, function($message) use($to, $subject) {
+        $message->to($to)->subject($subject);
+    });
+});
+
+
 // Route::get('/', function () {
 //     $view = view('index');
 //     $view->greeting = "Hey~ What's up";
